@@ -1,0 +1,6 @@
+flask
+falcon
+uwsgi
+requests
+rsa
+lxml

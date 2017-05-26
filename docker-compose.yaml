@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    image: pypy:2
+    container_name: pypy-flask-uwsgi
+    ports:
+    - "5000:5000"
+    volumes:
+    - .:/home
+    stdin_open: true
+    tty: true
