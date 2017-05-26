@@ -1,8 +1,8 @@
 version: '3'
 services:
   web:
-    image: pypy:2
-    container_name: pypy-flask-uwsgi
+    image: python:2
+    container_name: flask-uwsgi
     ports:
     - "5000:5000"
     volumes:
