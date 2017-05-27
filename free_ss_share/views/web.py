@@ -7,21 +7,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # print(get()[1])
     data = get()
-    # for i in data:
-    #     print i
     for i in data:
-        print i
         i['location'] = i['location'].decode('utf-8')
-    print data[1]
 
-    # {
-    #     'link': 'ss://Y2hhY2hhMjA6ZG91Yi5pbzMxNjU1QDEwNC4xNjAuMTczLjE0MTozMTY1NQ',
-    #     'location': '美国 – 洛杉矶 2',
-    #     'type': 'Shadowsocks',
-    #     'update_time': '18:44:58'
-    # }
     return render_template('index.html', data=data)
 
 
