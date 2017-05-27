@@ -1,6 +1,10 @@
+setuptools
 flask
 falcon
 uwsgi
 requests
 rsa
+peewee
+PyMySQL
 lxml
+redis

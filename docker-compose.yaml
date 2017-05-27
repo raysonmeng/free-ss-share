@@ -4,8 +4,14 @@ services:
     image: python:2
     container_name: flask-uwsgi
     ports:
-    - "5000:5000"
+      - "5000:5000"
     volumes:
-    - .:/home
+      - .:/home
     stdin_open: true
     tty: true
+    links:
+      - redis
+
+  redis:
+    image: redis
+    container_name: redis
