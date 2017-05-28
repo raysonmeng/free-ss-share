@@ -28,7 +28,6 @@ class KingSpider(object):
                 account['type'] = 'ShadowsocksR'
 
             account['link'] = clean_link(account['link'])
-            account['update_time'] = str(datetime.datetime.now()).split('.')[0].split(' ')[1]
         save(self.bowl)
 
 
