@@ -39,7 +39,6 @@ def _clean_ssr_link(link):
 
 
 def clean_link(link):
-    print 'clean link', link
     if 'ss:' in link:
         return link
     if 'ssr:' in link:

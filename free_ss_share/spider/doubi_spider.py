@@ -65,5 +65,6 @@ class DoubiSpider(object):
 
 if __name__ == '__main__':
     spider = DoubiSpider()
+    print len(spider.feedback())
     for i in spider.feedback():
-        print(i)
+        print i['ip'], i['location']
