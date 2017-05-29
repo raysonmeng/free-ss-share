@@ -3,8 +3,10 @@ flask
 falcon
 uwsgi
 requests
+requests[socks]
 rsa
 peewee
 PyMySQL
 lxml
 redis
+PySocks
