@@ -1,7 +1,9 @@
 # coding=utf-8
 from flask import Flask
 from flask import render_template
-from free_ss_share.utils.db_model import get
+
+from free_ss_share.db.redis_model import get
+
 app = Flask(__name__)
 
 
