@@ -17,10 +17,10 @@ class KingSpider(object):
 
     def get_meal(self):
         for spider in self.spider_dict.keys():
-            print('+    ' + spider + ' go for a meal, please wait a second.')
+            print('|    ' + spider + ' go for a meal, please wait a second.')
             meal = self.spider_dict[spider].feedback()
             self.bowl.extend(meal)
-            print('+    ' + spider + ' get meal successful! Totally get {num}'.format(num=str(len(meal))))
+            print('|    ' + spider + ' get meal successful! Totally get {num}'.format(num=str(len(meal))))
 
     def chew_meal(self):
         for account in self.bowl:
