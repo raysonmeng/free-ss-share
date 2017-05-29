@@ -12,7 +12,7 @@ def save(account_list):
         redis.hset(account['ip'], 'location', account['location'])
         redis.hset(account['ip'], 'type', account['type'])
         redis.hset(account['ip'], 'link', account['link'])
-        print '+    Eat {ip} {location}'.format(ip=account['ip'].decode('utf-8'), location=str(account['location']))
+        print '+    Eat {ip} {location}'.format(ip=account['ip'].decode('utf-8'), location=account['location'].decode('utf-8'))
 
 
 def get():
