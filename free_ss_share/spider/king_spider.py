@@ -5,7 +5,7 @@ import time
 from free_ss_share.db.redis_model import save
 from free_ss_share.spider.doubi_spider import DoubiSpider
 from free_ss_share.utils.sslink import clean_link
-from free_ss_share.utils.ss_speed_test import test
+# from free_ss_share.utils.ss_speed_test import test
 
 
 class KingSpider(object):
@@ -29,7 +29,7 @@ class KingSpider(object):
             else:
                 account['type'] = 'ShadowsocksR'
             account['link'] = clean_link(account['link'])
-            account['scores'] = test(account['link'])  # 加这一步每个代理需要多耗时5-6s
+            # account['scores'] = test(account['link'])  # 加这一步每个代理需要多耗时5-6s
     def eat_meal(self):
         save(self.bowl)
 
