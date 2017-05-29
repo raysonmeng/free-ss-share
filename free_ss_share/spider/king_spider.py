@@ -22,6 +22,7 @@ class KingSpider(object):
             print(spider + ' get meal successful! Totally get {num}'.format(num=str(len(meal))))
 
     def chew_meal(self):
+        print 'run chew meal'
         for account in self.bowl:
             if 'ss:' in account['link']:
                 account['type'] = 'Shadowsocks'
@@ -31,6 +32,7 @@ class KingSpider(object):
             account['link'] = clean_link(account['link'])
 
     def eat_meal(self):
+        print 'eat'
         save(self.bowl)
 
 
