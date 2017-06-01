@@ -14,7 +14,7 @@ def encode_ssr_link(ip, port, method, password, protocal, obfs):
     return ssr_link
 
 
-def decode_base64(data):
+def _decode_base64(data):
     """Decode base64, padding being optional.
 
     :param data: Base64 data as an ASCII byte string
@@ -27,8 +27,39 @@ def decode_base64(data):
     return base64.b64decode(data)
 
 
+def _decode_ss_link(link):
+    info = _decode_base64(link.split('://')[1])
+    account = {
+        'ip': info.split('@')[1].split(':')[0],
+        'port': info.split('@')[1].split(':')[1],
+        'method': info.split('@')[0].split(':')[0],
+        'password': info.split('@')[0].split(':')[1]
+    }
+    return account
+
+
+def _decode_ssr_link(link):
+    info = _decode_base64(link.split('://')[1]).split('/?')[0]
+    account = {
+        'ip': info.split(':')[0],
+        'port': info.split(':')[1],
+        'method': info.split(':')[3],
+        'password': _decode_base64(info.split(':')[-1]),
+        'protocol': info.split(':')[2],
+        'obfs': info.split(':')[4]
+    }
+    return account
+
+
+def decode_link(link):
+    if 'ss:' in link:
+        return _decode_ss_link(link)
+    if 'ssr:' in link:
+        return _decode_ssr_link(link)
+
+
 def _clean_ssr_link(link):
-    info = decode_base64(link.split('://')[1]).decode()
+    info = _decode_base64(link.split('://')[1]).decode()
 
     if '/?' in info:
         info = info.split('/?remarks')[0]

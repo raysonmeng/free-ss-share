@@ -16,8 +16,7 @@ DOUBI_OBFS= {
     '5': 'tls1.2_ticket_auth'
 }
 
-FREE_URL = 'http://freess.org/'
-S8_URL = 'http://ss.shadowsocks8.cc/'
+
 WINGY_URL = 'https://www.wingy.site/freess/'
 ARUKAS_URL = 'https://superfreess.arukascloud.io/'
 

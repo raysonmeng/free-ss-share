@@ -1,8 +1,8 @@
 version: '3'
 services:
   web:
-    image: python:2
-    container_name: flask-uwsgi
+    build: .
+    container_name: web
     ports:
       - "80:5000"
     volumes:
@@ -11,7 +11,17 @@ services:
     tty: true
     links:
       - redis
+      - db
 
   redis:
     image: redis
     container_name: redis
+
+  db:
+    image: mysql
+    container_name: mysql
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_DATABASE=mysitedb
+      - MYSQL_ROOT_PASSWORD=951005
