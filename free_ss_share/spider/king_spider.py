@@ -59,7 +59,7 @@ class KingSpider(object):
     def chew_meal(self):
         print '+                                                                   +'
         print '+-----------------------STRAT CHEW MEAL!----------------------------+'
-        for account in bowl[:20]:
+        for account in bowl:
             if 'ss:' in account['link']:
                 account['type'] = 'Shadowsocks'
             else:
@@ -74,7 +74,7 @@ class KingSpider(object):
         print '+                                                                   +'
 
     def eat_meal(self):
-        save(bowl[:20])
+        save(bowl)
 
 
 # run spider
