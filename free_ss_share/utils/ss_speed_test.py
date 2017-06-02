@@ -113,7 +113,7 @@ def test(link):
     print '|    平均时间', ave_time
 
     if ave_time == 0:
-        return 0
+        return 0.0
     if ave_time < 2:
         return 5 - unvalid_time_times*0.5
     elif 2 <= ave_time < 4:
@@ -125,7 +125,7 @@ def test(link):
     elif 8 <= ave_time < 10:
         return 1 - unvalid_time_times*0.5
     elif 10 <= ave_time:
-        return 0
+        return 0.0
 
 
 if __name__ == '__main__':

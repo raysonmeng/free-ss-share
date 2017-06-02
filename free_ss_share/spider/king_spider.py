@@ -59,22 +59,22 @@ class KingSpider(object):
     def chew_meal(self):
         print '+                                                                   +'
         print '+-----------------------STRAT CHEW MEAL!----------------------------+'
-        for account in bowl:
+        for account in bowl[:20]:
             if 'ss:' in account['link']:
                 account['type'] = 'Shadowsocks'
             else:
                 account['type'] = 'ShadowsocksR'
             print '|'
-            print '|    开始评分系统，请稍等。。。'
+            print '|----开始评分系统，请稍等。。。-------------------------------------+'
             account['score'] = test(account['link'])  # 加这一步每个代理需要多耗时10s
-            print '|    评分系统结束，最终得分{score}。'.format(score=str(account['score']))
+            print '|----评分系统结束，最终得分{score}。------------------------------------+'.format(score=str(account['score']))
             account['link'] = clean_link(account['link'])
             time.sleep(1)
-        print '+-----------------------FINISH CHEW MEAL!----------------------------+'
+        print '+-----------------------FINISH CHEW MEAL!---------------------------+'
         print '+                                                                   +'
 
     def eat_meal(self):
-        save(bowl)
+        save(bowl[:20])
 
 
 # run spider
