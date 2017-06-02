@@ -19,6 +19,20 @@ DOUBI_OBFS= {
 
 ARUKAS_URL = 'https://superfreess.arukascloud.io/'
 
+
+URL_LIST = [
+    "https://www.google.com/",
+    "https://www.youtube.com/",
+    "https://www.facebook.com/",
+    "https://twitter.com/",
+    "https://www.instagram.com/",
+    "https://www.wikipedia.org/"
+
+]
+
+PROXIES = {'http': 'socks5://127.0.0.1:1080',
+           'https': 'socks5://127.0.0.1:1080'}
+
 # https://www.google.com/
 GOOGLE_URL = "https://www.google.com/"
 

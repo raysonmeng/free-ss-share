@@ -17,6 +17,7 @@ class Logs(BaseModel):
 
 
 def insert(time, num):
+    creat_table()
     Logs(time=time, num=num).save()
     print '|    LOG: ', time, 'INSERT ', num
 
@@ -25,6 +26,12 @@ def get():
     for i in Logs.select():
         print i.time, i.num
 
+def creat_table():
+    if 'logs' in db.get_tables():
+        print '|    表［logs］存在，无需创建'
+    else:
+        Logs.create_table()
+        print '|    表［logs］创建成功！'
 
 # if __name__ == "__main__":
     # 创建表

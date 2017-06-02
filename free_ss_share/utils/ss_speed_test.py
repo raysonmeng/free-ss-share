@@ -1,11 +1,11 @@
 # coding=utf-8
 import os
-import time
 import json
 import socket
 import socks
 import requests
-from free_ss_share.settings.development import HEADERS, GOOGLE_URL
+import threading
+from free_ss_share.settings.development import HEADERS, GOOGLE_URL, URL_LIST, PROXIES
 from ss_link import decode_link
 
 #
@@ -44,148 +44,88 @@ def write_config(account):
     return account['ip']
 
 
-def _score(ip):
+time_dict = {}
+class TestThread(threading.Thread):
+    def __init__(self, url):
+        super(TestThread, self).__init__()
+        self.url = url
 
-    # proxies = {
-    #     "http": "socks5://127.0.0.1:1080",
-    #     "https": "socks5://127.0.0.1:1080",
-    # }
-    # session = requests.session()
-    # session.proxies = proxies
 
-    socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 1080)
-    socket.socket = socks.socksocket
-
-    try:
-        r = requests.get("http://httpbin.org/ip", timeout=30, headers=HEADERS)
-    except Exception as e:
-        print "|    连接代理［", ip, "］失败！", e
-        return 0
-
-    # if ip in r.content:
-    #     print '|    连接代理［', ip, '］成功！'
-    #     return float(str(requests.get(GOOGLE_URL, headers=HEADERS).elapsed).split(':')[-1])
-    # else:
-    #     print '|    连接代理［', ip, '］错误！'
-    #     return 0
-
-    if ip in r.content:
-        print '|    连接代理［', ip, '］成功！'
-
-        time.sleep(5)
+    def run(self):
         try:
-            r = requests.get(GOOGLE_URL, timeout=10, headers=HEADERS)
-            time1 = float(str(r.elapsed).split(':')[-1])
-            print '|    访问［Google］用时：', time1, '秒'
+            r = requests.get(self.url, proxies=PROXIES, timeout=20, headers=HEADERS)
+            use_time = float(str(r.elapsed).split(':')[-1])
+
+            time_dict[self.url] = use_time
+            print '|    访问［' + self.url + '］用时：', use_time, '秒'
         except Exception as e:
-            time1 = 5
-            print '|    访问［Google］失败！', e
-
-        time.sleep(5)
-        try:
-            r = requests.get("https://www.youtube.com/", timeout=10, headers=HEADERS)
-            time2 = float(str(r.elapsed).split(':')[-1])
-            print '|    访问［YouTube］用时：', time2, '秒'
-        except Exception as e:
-            time2 = 5
-            print '|    访问［YouTube］失败！', e
-
-        time.sleep(5)
-        try:
-            r = requests.get("https://www.facebook.com/", timeout=10, headers=HEADERS)
-            time3 = float(str(r.elapsed).split(':')[-1])
-            print '|    访问［Facebook］用时：', time3, '秒'
-        except Exception as e:
-            time3 = 5
-            print '|    访问［Facebook］失败！', e
-
-        time.sleep(5)
-        try:
-            r = requests.get("https://twitter.com/", timeout=10, headers=HEADERS)
-            time4 = float(str(r.elapsed).split(':')[-1])
-            print '|    访问［Twitter］用时：', time4, '秒'
-        except Exception as e:
-            time4 = 5
-            print '|    访问［Twitter］失败！', e
-
-        time.sleep(5)
-        try:
-            r = requests.get("https://www.instagram.com/", timeout=10, headers=HEADERS)
-            time5 = float(str(r.elapsed).split(':')[-1])
-            print '|    访问［Instagram］用时：', time5, '秒'
-        except Exception as e:
-            time5 = 5
-            print '|    访问［Instagram］失败！', e
-
-        time.sleep(5)
-        try:
-            r = requests.get("https://www.wikipedia.org/", timeout=10, headers=HEADERS)
-            time6 = float(str(r.elapsed).split(':')[-1])
-            print '|    访问［Wikipedia］用时：', time6, '秒'
-        except Exception as e:
-            time6 = 5
-            print '|    访问［Wikipedia］失败！', e
-
-        round_time = round((time1 + time2 + time3 + time4 + time5 + time6) / 6, 2)
-
-        print '|    平均用时约：', round_time, '秒'
-        if round_time < 1.00:
-            score = 5
-            print '|    得分★★★★★'
-        elif 1.00 <= round_time < 2.00:
-            score = 4
-            print '|    得分★★★★☆'
-        elif 2.00 <= round_time < 3.00:
-            score = 3
-            print '|    得分★★★☆☆'
-        elif 3.00 <= round_time < 4.00:
-            score = 2
-            print '|    得分★★☆☆☆'
-        elif 4.00 <= round_time < 5.00:
-            score = 1
-            print '|    得分★☆☆☆☆'
-        elif 5.00 <= round_time:
-            score = 0
-            print '|    得分☆☆☆☆☆'
-        return score
-    else:
-        print "|    连接代理［", ip, "］错误！"
-        return 0
+            time_dict[self.url] = -1
+            print '|    访问［' + self.url + '］失败！', e
 
 
 def test(link):
-    # 1. 解析link
-    # 2. 将解析结果写入shadowsocks 配置文件中
-    # 3. 开启shadowsocks
-    # 4. 通过代理访问google, youtube, facebook, twitter, instagram, wikipedia计算平均时间进行打分（最好写成同步的多线程代码）
-    #   4.1 访问时设定timeout5s(捕获timeout异常) 大于5秒减一分
-    # 5. 返回值 返回分数（1，2，3，4，5） 和 访问各个网站的用时（x.xxxxx）
     ip = write_config(decode_link(link))
     print '|    写入配置文件成功！'
     print '|    开始测试［', ip, '］！'
     os.system('ss-local -c /tmp/config.json -f /tmp/ss.pid')
     print '|    打开客户端！'
-    time.sleep(3)
 
+    thread_list = []
+    for url in URL_LIST:
+        test_thread = TestThread(url)
+        thread_list.append(test_thread)
 
-    # os.system('curl --socks5 127.0.0.1:1080 https://www.google.com/')
-
-
-    # socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 1080)
-    # socket.socket = socks.socksocket
-    # print requests.get(GOOGLE_URL).text
-
+    print '|    开始测试代理有效性！'
     try:
-        score = _score(ip)
+        if ip in requests.get('http://httpbin.org/ip', proxies=PROXIES, timeout=20, headers=HEADERS).content:
+            print '|    代理有效！'
     except Exception as e:
-        score = 0
-        os.system('kill -9 `cat /tmp/ss.pid`')
-        print '|    关闭客户端！'
-        return score
+        print '|    代理无效！', e
+        return 0
+
+    print '|    开始进行网速测试！'
+    for thread in thread_list:
+        thread.start()
+
+    for thread in thread_list:
+        if thread.isAlive():
+            thread.join()
+    print '|    网速测试结束。'
+
 
     os.system('kill -9 `cat /tmp/ss.pid`')
     print '|    关闭客户端！'
-    return score
+    time_list = time_dict.values()
+    valid_time_list = []
+    unvalid_time_times = 0
+
+    ave_time = 0
+    for time in time_list:
+        if time != -1:
+            valid_time_list.append(time)
+        else:
+            unvalid_time_times += 1
+
+    print '|    有效时间', valid_time_list
+
+    if len(valid_time_list):
+        ave_time = sum(valid_time_list)/len(valid_time_list)
+    print '|    平均时间', ave_time
+
+    if ave_time == 0:
+        return 0
+    if ave_time < 2:
+        return 5 - unvalid_time_times*0.5
+    elif 2 <= ave_time < 4:
+        return 4 - unvalid_time_times*0.5
+    elif 4 <= ave_time < 6:
+        return 3 - unvalid_time_times*0.5
+    elif 6 <= ave_time < 8:
+        return 2 - unvalid_time_times*0.5
+    elif 8 <= ave_time < 10:
+        return 1 - unvalid_time_times*0.5
+    elif 10 <= ave_time:
+        return 0
 
 
 if __name__ == '__main__':

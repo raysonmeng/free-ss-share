@@ -7,10 +7,12 @@ redis = Redis(host='redis', port=6379)
 
 
 def save(account_list):
-    flushall()
+    print '+                                                                   +'
+    print '+------------------------START EAT MEAL!----------------------------+'
+    redis.flushall()
     i = 0
     for account in account_list:
-        if account['score'] == 0:
+        if account['score'] <= 0:
             break
         redis.hset(account['ip'], 'location', account['location'])
         redis.hset(account['ip'], 'type', account['type'])
@@ -18,7 +20,9 @@ def save(account_list):
         redis.hset(account['ip'], 'score', account['score'])
         print '|    Eat ', account['ip'], account['location'], account['type']
         i += 1
-    # insert(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), str(i))
+    insert(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), str(i))
+    print '+----------------------FINISH EAT MEAL!-----------------------------+'
+    print '+                                                                   +'
 
 
 def flushall():
@@ -30,4 +34,3 @@ def get():
     for i in redis.keys():
         account_list.append(redis.hgetall(i))
     return account_list
-
