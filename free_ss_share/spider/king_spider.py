@@ -3,7 +3,7 @@ import time
 import random
 from free_ss_share.db.redis_model import save
 from free_ss_share.spider.doubi_spider import DoubiSpider
-from free_ss_share.utils.ss_link import clean_link, decode_link
+from free_ss_share.utils.ss_link import clean_link
 from free_ss_share.utils.ss_speed_test import test
 
 
@@ -27,11 +27,11 @@ class KingSpider(object):
                 account['type'] = 'Shadowsocks'
             else:
                 account['type'] = 'ShadowsocksR'
+            print '|'
             print '|    开始评分系统，请稍等。。。'
-            start_time = time.time()
             account['score'] = test(account['link'])  # 加这一步每个代理需要多耗时10s
+            print '|    评分系统结束，最终得分{score}。'.format(score=str(account['score']))
             account['link'] = clean_link(account['link'])
-            print '|    评分系统结束，最终得分{score}，本次用时{time}s。'.format(score=str(account['score']),time=str(time.time()-start_time))
 
     def eat_meal(self):
         save(self.bowl)

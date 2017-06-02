@@ -28,5 +28,5 @@ def get():
 
 # if __name__ == "__main__":
     # 创建表
-    # Logs.create_table()  # 创建User表
+    # Logs.create_table()
     # get()

@@ -8,8 +8,8 @@ def encode_ss_link(ip, port, method, password):
     return ss_link
 
 
-def encode_ssr_link(ip, port, method, password, protocal, obfs):
-    ssr_info = str(ip) + ':' + str(port) + ':' + str(protocal) + ':' + str(method) + ':' + str(obfs) + ':' + base64.b64encode(str(password))
+def encode_ssr_link(ip, port, method, password, protocol, obfs):
+    ssr_info = str(ip) + ':' + str(port) + ':' + str(protocol) + ':' + str(method) + ':' + str(obfs) + ':' + base64.b64encode(str(password))
     ssr_link = 'ssr://' + base64.b64encode(ssr_info)
     return ssr_link
 
@@ -39,7 +39,9 @@ def _decode_ss_link(link):
 
 
 def _decode_ssr_link(link):
-    info = _decode_base64(link.split('://')[1]).split('/?')[0]
+    info = _decode_base64(link.split('://')[1])
+    if '/?' in info:
+        info = info.split('/?')[0]
     account = {
         'ip': info.split(':')[0],
         'port': info.split(':')[1],
@@ -60,12 +62,11 @@ def decode_link(link):
 
 def _clean_ssr_link(link):
     info = _decode_base64(link.split('://')[1]).decode()
-
     if '/?' in info:
-        info = info.split('/?remarks')[0]
+        info = info.split('/?')[0]
 
-    remarks = '/?remarks='+base64.urlsafe_b64encode('获取更多免费账号,微信搜(船长Break)')
-    link = 'ssr://' + base64.urlsafe_b64encode(info + remarks)
+    # remarks = '/?remarks='+base64.urlsafe_b64encode('获取更多免费账号,微信搜(船长Break)')
+    link = 'ssr://' + base64.urlsafe_b64encode(info + '/?remarks=6I635Y+W5pu05aSa5YWN6LS56LSm5Y+3LOW+ruS/oeaQnCjoiLnplb9CcmVhayk=')
     return link
 
 

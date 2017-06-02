@@ -1,6 +1,6 @@
 import os
 
-DOUBI_URL = 'https://doub.bid/sszhfx/'
+DOUBI_URL = 'https://doub.io/sszhfx/'
 DOUBI_PROTOCAL= {
     '1': 'origin',
     '2': 'verify_deflate',
@@ -17,38 +17,13 @@ DOUBI_OBFS= {
 }
 
 
-WINGY_URL = 'https://www.wingy.site/freess/'
 ARUKAS_URL = 'https://superfreess.arukascloud.io/'
 
-RY_GET_COOKIES_URL = 'https://ry-ss.me/auth/login'
-RY_GET_COOKIES_PAYLOAD = "email=rayson951005%40gmail.com&passwd=mxl951005&remember_me=week"
-RY_GET_COOKIES_HEADERS = {
-    'host': "ry-ss.me",
-    'connection': "keep-alive",
-    'content-length': "64",
-    'accept': "application/json, text/javascript, */*; q=0.01",
-    'origin': "https://ry-ss.me",
-    'x-requested-with': "XMLHttpRequest",
-    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
-    'content-type': "application/x-www-form-urlencoded",
-    'dnt': "1",
-    'referer': "https://ry-ss.me/auth/login",
-    'accept-encoding': "gzip, deflate, br",
-    'accept-language': "zh-CN,zh;q=0.8,en;q=0.6",
-    'cache-control': "no-cache",
-    }
+# https://www.google.com/
+GOOGLE_URL = "https://www.google.com/"
 
-RY_GET_NODE_URL = 'https://ry-ss.me/user/node'
-RY_GET_NODE_HEADERS = {
-    'host': "ry-ss.me",
-    'connection': "keep-alive",
-    'upgrade-insecure-requests': "1",
-    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
-    'accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    'dnt': "1",
-    'referer': "https://ry-ss.me/user",
-    'accept-encoding': "gzip, deflate, sdch, br",
-    'accept-language': "zh-CN,zh;q=0.8,en;q=0.6",
+HEADERS = {
+    'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
     }
 
 

@@ -1,4 +1,5 @@
 # coding=utf-8
+# https://shadowsocksr.ru/
 import re
 from selenium import webdriver
 from lxml import etree

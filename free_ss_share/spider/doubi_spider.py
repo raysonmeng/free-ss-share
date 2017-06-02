@@ -29,7 +29,6 @@ class DoubiSpider(object):
                             'link': url_list[i].split('text=')[1]
                         }
                     )
-                    # print info_list[-1]
             return info_list
 
         except Exception as e:
@@ -43,6 +42,5 @@ class DoubiSpider(object):
 
 if __name__ == '__main__':
     spider = DoubiSpider()
-    print len(spider.feedback())
     for i in spider.feedback():
         print i['ip'], i['location']
