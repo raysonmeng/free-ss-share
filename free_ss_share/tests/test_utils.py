@@ -48,3 +48,9 @@ class TestSSSpeedTestClass:
     def test_clean_link(self):
         assert 1 == 1
 
+class TestGuaGuaSpider:
+    pass
+
+
+class TestDoubiSpider:
+    pass

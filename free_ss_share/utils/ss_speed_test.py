@@ -75,13 +75,13 @@ def test(link):
         test_thread = TestThread(url)
         thread_list.append(test_thread)
 
-    print '|    开始测试代理有效性！'
-    try:
-        if ip in requests.get('http://httpbin.org/ip', proxies=PROXIES, timeout=20, headers=HEADERS).content:
-            print '|    代理有效！'
-    except Exception as e:
-        print '|    代理无效！', e
-        return 0
+    # print '|    开始测试代理有效性！'
+    # try:
+    #     if ip in requests.get('http://httpbin.org/ip', proxies=PROXIES, timeout=20, headers=HEADERS).content:
+    #         print '|    代理有效！'
+    # except Exception as e:
+    #     print '|    代理无效！', e
+    #     return 0
 
     print '|    开始进行网速测试！'
     for thread in thread_list:
