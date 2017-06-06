@@ -1,5 +1,3 @@
-Please Visit http://captianbreak.com/
-
 ## Key Features
 
 * This paltform is a free Shadowsocks/ShadowsocksR account info share platform.
