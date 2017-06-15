@@ -21,7 +21,7 @@ def save(account_list):
         redis.hset(account['ip'], 'score', account['score'])
         print '|    Eat ', account['ip'], account['location'], account['type']
         i += 1
-    insert(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), str(i))
+    # insert(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), str(i))
     print '+----------------------FINISH EAT MEAL!-----------------------------+'
     print '+                                                                   +'
 

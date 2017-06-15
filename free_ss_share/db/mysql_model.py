@@ -14,6 +14,7 @@ class BaseModel(Model):
 class Logs(BaseModel):
     time = DateTimeField()
     num = IntegerField()
+    # exception = TextField(default='No Error')
 
 
 def insert(time, num):
@@ -25,6 +26,7 @@ def insert(time, num):
 def get():
     for i in Logs.select():
         print i.time, i.num
+
 
 def creat_table():
     if 'logs' in db.get_tables():

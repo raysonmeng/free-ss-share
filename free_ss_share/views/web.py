@@ -12,7 +12,7 @@ def index():
     data = get()
     for i in data:
         i['location'] = i['location'].decode('utf-8')
-    return render_template('index.html', data=sorted(data, key='score')[::-1])
+    return render_template('index.html', data=data)
 
 
 # @app.route('/admin')
