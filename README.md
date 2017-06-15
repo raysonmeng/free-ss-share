@@ -10,13 +10,14 @@
 Clone this repository, and run
 
 ```
-$> cd PATH-TO-MARKDOWNIFY-DESKTOP-APP
-$> docker-compose up
+# tmux new -s ss
+# cd PATH-TO-THIS-PROJECT
+# docker-compose up
 ```
 
 In docker
 
 ```
-$> python /home/free_ss_share/spider/king_spider.py
-$> uwsgi --ini /home/free_ss_share/settings/uwsgi.ini
+# python /home/free_ss_share/spider/king_spider.py
+# uwsgi --ini /home/free_ss_share/settings/uwsgi.ini
 ```
