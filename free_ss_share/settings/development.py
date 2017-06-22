@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-DOUBI_URL = 'https://doub.io/wp-login.php?action=postpass'
+DOUBI_URL = 'https://doub.bid/wp-login.php?action=postpass'
 DOUBI_PROTOCAL = {
     '1': 'origin',
     '2': 'verify_deflate',
