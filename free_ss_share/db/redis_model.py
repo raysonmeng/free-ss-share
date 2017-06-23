@@ -12,7 +12,6 @@ def save(account_list):
     redis.flushall()
     i = 0
     for account in account_list:
-        print account
         if account['score'] <= 0:
             continue
         redis.hset(account['ip'], 'location', account['location'])

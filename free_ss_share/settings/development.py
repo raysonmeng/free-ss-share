@@ -20,9 +20,8 @@ DOUBI_HEADERS = {
     'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
     'cache-control': "no-cache"
 }
-DOUBI_QUERY_STRING = {"action":"postpass"}
+DOUBI_QUERY_STRING = {"action": "postpass"}
 DOUBI_PAYLOAD = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"post_password\"\r\n\r\ndoub.io\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"Submit\"\r\n\r\n提交\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
-
 
 ARUKAS_URL = 'https://superfreess.arukascloud.io/'
 
@@ -38,9 +37,6 @@ URL_LIST = [
 
 PROXIES = {'http': 'socks5://127.0.0.1:1080',
            'https': 'socks5://127.0.0.1:1080'}
-
-# https://www.google.com/
-GOOGLE_URL = "https://www.google.com/"
 
 HEADERS = {
     'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"

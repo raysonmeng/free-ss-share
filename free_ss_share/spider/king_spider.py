@@ -66,10 +66,16 @@ class KingSpider(object):
                 account['type'] = 'ShadowsocksR'
             print '|'
             print '|----开始评分系统，请稍等。。。-------------------------------------+'
-            account['score'] = test(account['link'])  # 加这一步每个代理需要多耗时10s
+            try:
+                account['score'] = test(account['link'])  # 加这一步每个代理需要多耗时10s
+            except Exception:
+                print '|----评分系统结束，评分失败，舍弃本条数据。------------------------------------+'
+                account['score'] = 0.0
+                continue
+
             print '|----评分系统结束，最终得分{score}。------------------------------------+'.format(score=str(account['score']))
             account['link'] = clean_link(account['link'])
-            time.sleep(2)
+            time.sleep(5)
         print '+-----------------------FINISH CHEW MEAL!---------------------------+'
         print '+                                                                   +'
 

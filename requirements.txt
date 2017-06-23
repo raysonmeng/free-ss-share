@@ -9,4 +9,5 @@ peewee
 PyMySQL
 lxml
 redis
+pytest
 PySocks
